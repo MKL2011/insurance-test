@@ -19,4 +19,8 @@ public class PolicyFacade {
                 policy.getStartCoverDate(), policy.getEndCoverDate(), policy.getCreationDate(), policy.getUpdateDate(),
                 policy.getStatus().name())).collect(Collectors.toList());
     }
+
+    public Integer createPolicy(PolicyRequest policyRequest) {
+        return policyService.createPolicy(policyRequest.name(), policyRequest.startCoverDate(), policyRequest.endCoverDate(), policyRequest.status());
+    }
 }

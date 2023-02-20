@@ -26,13 +26,13 @@ public class Policy {
         this.status = status;
     }
 
-    public Policy(String name, LocalDate startCoverDate, LocalDate endCoverDate, LocalDate creationDate, LocalDate updateDate, PolicyStatus status) {
+    public Policy(String name, LocalDate startCoverDate, LocalDate endCoverDate, PolicyStatus status) {
         this.id = new AtomicInteger().incrementAndGet();
         this.name = name;
         this.startCoverDate = startCoverDate;
         this.endCoverDate = endCoverDate;
-        this.creationDate = creationDate;
-        this.updateDate = updateDate;
+        this.creationDate = LocalDate.now();
+        this.updateDate = LocalDate.now();
         this.status = status;
     }
 
