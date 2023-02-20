@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+import java.time.LocalDate;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
@@ -36,6 +38,18 @@ public class H2RepositoryTest {
         Iterable<PolicyDataBaseModel> policies = springDataH2PolicyRepository.findAll();
 
         assertThat(policies).hasSize(3).contains(policyDataBaseModel1, policyDataBaseModel2, policyDataBaseModel3);
+    }
+
+    @Test
+    public void test_add_policy() {
+
+        PolicyDataBaseModel policyDataBaseModel = springDataH2PolicyRepository.save(new PolicyDataBaseModel(1, "policy1",
+                LocalDate.of(2021, 1, 12), LocalDate.of(2025, 12, 15),
+                LocalDate.of(2021, 10, 10), LocalDate.of(2022, 1, 11), "ACTIVE"));
+
+        assertThat(policyDataBaseModel).hasFieldOrPropertyWithValue("id", 1);
+        assertThat(policyDataBaseModel).hasFieldOrPropertyWithValue("name", "policy1");
+        assertThat(policyDataBaseModel).hasFieldOrPropertyWithValue("status", "ACTIVE");
     }
 
 }

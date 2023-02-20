@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,6 +27,15 @@ public class ServiceTest {
         List<Policy> allPolicies = policyService.getAllPolicies();
         assertThat(allPolicies.size()).isEqualTo(5);
         assertThat(allPolicies.stream().map(Policy::getId)).contains(1,2,3,4,5);
+
+    }
+
+    @Test
+    public void test_create_service() {
+        Policy policy = new Policy();
+        when(policyRepository.save(policy)).thenReturn(new PolicyRepositoryInMemory().save(policy));
+        Integer policyId= policyService.createPolicy("policy1", LocalDate.of(2022,6,11),LocalDate.of(2022,7,19),"ACTIVE");
+        assertThat(policyId).isEqualTo(0);
 
     }
 }

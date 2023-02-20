@@ -1,4 +1,5 @@
 package com.tinubu.test.adapters.api;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,5 +17,10 @@ public class PolicyRestController {
     @RequestMapping(value = "/policies", method = RequestMethod.GET)
     public List<PolicyResponse> getPolicies() {
         return policies.getAllPolicies();
+    }
+
+    @RequestMapping(value="/create-policy", method = RequestMethod.POST)
+    public Integer createPolicy(@RequestBody PolicyRequest policyRequest){
+        return policies.createPolicy(policyRequest);
     }
 }
