@@ -23,4 +23,9 @@ public class PolicyRestController {
     public Integer createPolicy(@RequestBody PolicyRequest policyRequest){
         return policies.createPolicy(policyRequest);
     }
+
+    @RequestMapping(value="/update-policy", method = RequestMethod.PUT)
+    public Integer updatePolicy(@RequestBody PolicyRequest policyRequest){
+        return policies.update(policyRequest);
+    }
 }

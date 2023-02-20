@@ -2,7 +2,6 @@ package com.tinubu.test.domain.model;
 
 
 import java.time.LocalDate;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Policy {
     private Integer id;
@@ -23,16 +22,6 @@ public class Policy {
         this.endCoverDate = endCoverDate;
         this.creationDate = creationDate;
         this.updateDate = updateDate;
-        this.status = status;
-    }
-
-    public Policy(String name, LocalDate startCoverDate, LocalDate endCoverDate, PolicyStatus status) {
-        this.id = new AtomicInteger().incrementAndGet();
-        this.name = name;
-        this.startCoverDate = startCoverDate;
-        this.endCoverDate = endCoverDate;
-        this.creationDate = LocalDate.now();
-        this.updateDate = LocalDate.now();
         this.status = status;
     }
 
@@ -91,6 +80,44 @@ public class Policy {
 
     public void setStatus(PolicyStatus status) {
         this.status = status;
+    }
+
+    public static final class PolicyBuilder {
+
+        Integer id;
+        String name;
+        LocalDate startCoverDate;
+        LocalDate endCoverDate;
+
+        LocalDate creationDate;
+        LocalDate updateDate;
+        PolicyStatus status;
+
+        public PolicyBuilder(String name, LocalDate startCoverDate, LocalDate endCoverDate, PolicyStatus status) {
+            this.name = name;
+            this.startCoverDate = startCoverDate;
+            this.endCoverDate = endCoverDate;
+            this.status = status;
+        }
+
+        public Policy.PolicyBuilder id(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public Policy.PolicyBuilder creationDate(LocalDate creationDate) {
+            this.creationDate = creationDate;
+            return this;
+        }
+
+        public Policy.PolicyBuilder updateDate(LocalDate updateDate) {
+            this.updateDate = updateDate;
+            return this;
+        }
+
+        public Policy build() {
+            return new Policy(id, name, startCoverDate, endCoverDate, creationDate, updateDate, status);
+        }
     }
 
     public boolean isValid(){

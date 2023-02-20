@@ -2,8 +2,7 @@ package com.tinubu.test.adapters.api;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -44,10 +43,17 @@ public class ControllerTest {
 
     @Test
     public void test_create_policy() throws Exception {
-        PolicyRequest policyRequest = new PolicyRequest("policy1", LocalDate.of(2021, 1, 12),
-                LocalDate.of(2025, 12, 15), "ACTIVE");
+        PolicyRequest policyRequest = new PolicyRequest.PolicyRequestBuilder("policy1", LocalDate.of(2021, 1, 12),
+                LocalDate.of(2025, 12, 15), "ACTIVE").build();
           this.mockMvc.perform(post("/create-policy") .content(objectMapper.writeValueAsString(policyRequest))
-                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect(content().string(containsString("0")));
+                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+    }
+
+    @Test
+    public void test_update_policy() throws Exception {
+        PolicyRequest policyRequest = new PolicyRequest.PolicyRequestBuilder("policy1", LocalDate.of(2021, 1, 12),
+                LocalDate.of(2025, 12, 15), "ACTIVE").id(1).build();
+        this.mockMvc.perform(put("/update-policy") .content(objectMapper.writeValueAsString(policyRequest))
+                        .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
     }
 }
