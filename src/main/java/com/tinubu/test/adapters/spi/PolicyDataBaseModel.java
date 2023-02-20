@@ -34,6 +34,15 @@ public class PolicyDataBaseModel {
         this.status = status;
     }
 
+    public PolicyDataBaseModel(String name, LocalDate startCoverDate, LocalDate endCoverDate, LocalDate creationDate, LocalDate updateDate, String status) {
+        this.name = name;
+        this.startCoverDate = startCoverDate;
+        this.endCoverDate = endCoverDate;
+        this.creationDate = creationDate;
+        this.updateDate = updateDate;
+        this.status = status;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -62,4 +71,12 @@ public class PolicyDataBaseModel {
         return status;
     }
 
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
