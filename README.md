@@ -1,6 +1,16 @@
 # insurance-test
 
-feature 1 : lister les polices d’assurance
-feature 2 : Créer une police d’assurance
-feature 3 : Lire une police d’assurance
-feature 4 : Editer une police d’assurance
+feature 1 : list policies
+feature 2 : add policy
+feature 3 : get policy
+feature 4 : edit policy
+
+
+technical stack : 
+java 17
+springboot
+springdata 
+springweb
+h2
+
+in order to init database h2 , set spring.sql.init.mode=always then launch the application , then reset to spring.sql.init.mode=never 
