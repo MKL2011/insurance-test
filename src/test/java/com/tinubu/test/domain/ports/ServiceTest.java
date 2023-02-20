@@ -51,4 +51,12 @@ public class ServiceTest {
         assertThat(policyId).isEqualTo(0);
 
     }
+
+    @Test
+    public void test_find_by_id_service() {
+        when(policyRepository.findById(1)).thenReturn(new PolicyRepositoryInMemory().findById(1));
+        Policy foundPolicy = policyService.findPolicyById(1);
+        assertThat(foundPolicy.getId()).isEqualTo(1);
+
+    }
 }

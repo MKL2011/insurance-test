@@ -43,4 +43,8 @@ public class PolicyService {
             throw new InvalidPolicyException();
         }
     }
+
+    public Policy findPolicyById(Integer id) {
+        return policyRepository.findById(id);
+    }
 }

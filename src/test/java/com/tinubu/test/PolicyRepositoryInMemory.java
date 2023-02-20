@@ -30,9 +30,4 @@ public class PolicyRepositoryInMemory implements PolicyRepository {
     public Integer save(Policy policy) {
         return 0;
     }
-
-    @Override
-    public boolean existsById(Integer id) {
-        return true;
-    }
 }

@@ -46,9 +46,4 @@ public class H2PolicyRepository implements PolicyRepository {
         springDataH2PolicyRepository.save(policyDataBaseModelInput);
          return policy.getId();
     }
-
-    @Override
-    public boolean existsById(Integer id) {
-        return springDataH2PolicyRepository.existsById(id);
-    }
 }
