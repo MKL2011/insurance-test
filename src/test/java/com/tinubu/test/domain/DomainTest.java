@@ -1,4 +1,4 @@
-package com.tinubu.test;
+package com.tinubu.test.domain;
 
 import com.tinubu.test.domain.model.Policy;
 import com.tinubu.test.domain.model.PolicyStatus;
@@ -71,6 +71,9 @@ public class DomainTest {
         policy = new Policy(1, "policy1", LocalDate.of(2021, 1, 12),
                 LocalDate.of(2025, 12, 15), LocalDate.of(2021, 10, 10),
                 LocalDate.of(2022, 1, 11), PolicyStatus.ACTIVE);
+        policy = new Policy(2, "policy2", LocalDate.of(2011, 1, 12),
+                LocalDate.of(2015, 12, 15), LocalDate.of(2011, 10, 10),
+                LocalDate.of(2010, 1, 11), PolicyStatus.INACTIVE);
         assertThat(policy.isValid()).isTrue();
     }
 
