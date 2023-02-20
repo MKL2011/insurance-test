@@ -1,5 +1,6 @@
 package com.tinubu.test.adapters.api;
 
+import com.tinubu.test.domain.model.Policy;
 import com.tinubu.test.domain.ports.PolicyService;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,11 @@ public class PolicyFacade {
 
     public Integer update(PolicyRequest policyRequest) {
         return policyService.updatePolicy(policyRequest.id(),policyRequest.name(), policyRequest.startCoverDate(), policyRequest.endCoverDate(), policyRequest.status());
+    }
+
+    public PolicyResponse findById(Integer id) {
+       Policy policy= policyService.findPolicyById(id);
+       return new PolicyResponse(policy.getId(),policy.getName(),policy.getStartCoverDate(),policy.getEndCoverDate(),
+               policy.getCreationDate(),policy.getUpdateDate(),policy.getStatus().name());
     }
 }

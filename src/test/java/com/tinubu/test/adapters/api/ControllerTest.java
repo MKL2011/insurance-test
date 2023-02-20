@@ -45,7 +45,7 @@ public class ControllerTest {
     public void test_create_policy() throws Exception {
         PolicyRequest policyRequest = new PolicyRequest.PolicyRequestBuilder("policy1", LocalDate.of(2021, 1, 12),
                 LocalDate.of(2025, 12, 15), "ACTIVE").build();
-          this.mockMvc.perform(post("/create-policy") .content(objectMapper.writeValueAsString(policyRequest))
+        this.mockMvc.perform(post("/create-policy").content(objectMapper.writeValueAsString(policyRequest))
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
     }
 
@@ -53,7 +53,17 @@ public class ControllerTest {
     public void test_update_policy() throws Exception {
         PolicyRequest policyRequest = new PolicyRequest.PolicyRequestBuilder("policy1", LocalDate.of(2021, 1, 12),
                 LocalDate.of(2025, 12, 15), "ACTIVE").id(1).build();
-        this.mockMvc.perform(put("/update-policy") .content(objectMapper.writeValueAsString(policyRequest))
-                        .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+        this.mockMvc.perform(put("/update-policy").content(objectMapper.writeValueAsString(policyRequest))
+                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+    }
+
+    @Test
+    public void test_get_policy() throws Exception {
+        PolicyResponse policyResponse=new PolicyResponse(1, "policy1",
+                LocalDate.of(2021, 1, 12), LocalDate.of(2025, 12, 15),
+                LocalDate.of(2021, 10, 10), LocalDate.of(2022, 1, 11), "ACTIVE");
+        when(policies.findById(1)).thenReturn(policyResponse);
+        this.mockMvc.perform(get("/policies/1")).andExpect(status().isOk())
+                .andExpect(content().string(containsString("\"id\":1")));
     }
 }

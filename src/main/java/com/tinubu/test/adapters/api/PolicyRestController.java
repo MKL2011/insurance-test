@@ -1,8 +1,5 @@
 package com.tinubu.test.adapters.api;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,10 @@ public class PolicyRestController {
     @RequestMapping(value="/update-policy", method = RequestMethod.PUT)
     public Integer updatePolicy(@RequestBody PolicyRequest policyRequest){
         return policies.update(policyRequest);
+    }
+
+    @RequestMapping(value="/policies/{id}", method = RequestMethod.GET)
+    public PolicyResponse getPolicy(@PathVariable Integer id) {
+        return policies.findById(id);
     }
 }

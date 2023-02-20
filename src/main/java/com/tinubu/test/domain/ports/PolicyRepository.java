@@ -10,6 +10,4 @@ public interface PolicyRepository {
     Policy findById(Integer id);
 
     Integer save(Policy policy);
-
-    boolean existsById(Integer id);
 }
