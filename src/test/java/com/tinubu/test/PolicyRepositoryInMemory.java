@@ -1,10 +1,12 @@
 package com.tinubu.test;
 
+import com.tinubu.test.domain.PolicyNotFoundException;
 import com.tinubu.test.domain.model.Policy;
 import com.tinubu.test.domain.ports.PolicyRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static com.tinubu.test.domain.model.PolicyStatus.ACTIVE;
 import static com.tinubu.test.domain.model.PolicyStatus.INACTIVE;
@@ -23,11 +25,18 @@ public class PolicyRepositoryInMemory implements PolicyRepository {
 
     @Override
     public Policy findById(Integer id) {
-        return getAll().stream().filter(policy -> policy.getId() == id).findFirst().get();
+         Optional<Policy> policyOptional=getAll().stream().filter(policy -> policy.getId() == id).findFirst();
+         if(policyOptional.isPresent()) return policyOptional.get();
+         else throw new PolicyNotFoundException();
     }
 
     @Override
     public Integer save(Policy policy) {
+        return 0;
+    }
+
+    @Override
+    public Integer update(Policy policy) {
         return 0;
     }
 }

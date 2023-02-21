@@ -24,16 +24,6 @@ public class PolicyDataBaseModel {
     public PolicyDataBaseModel() {
     }
 
-    public PolicyDataBaseModel(Integer id, String name, LocalDate startCoverDate, LocalDate endCoverDate, LocalDate creationDate, LocalDate updateDate, String status) {
-        this.id = id;
-        this.name = name;
-        this.startCoverDate = startCoverDate;
-        this.endCoverDate = endCoverDate;
-        this.creationDate = creationDate;
-        this.updateDate = updateDate;
-        this.status = status;
-    }
-
     public PolicyDataBaseModel(String name, LocalDate startCoverDate, LocalDate endCoverDate, LocalDate creationDate, LocalDate updateDate, String status) {
         this.name = name;
         this.startCoverDate = startCoverDate;
@@ -78,5 +68,17 @@ public class PolicyDataBaseModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setStartCoverDate(LocalDate startCoverDate) {
+        this.startCoverDate = startCoverDate;
+    }
+
+    public void setEndCoverDate(LocalDate endCoverDate) {
+        this.endCoverDate = endCoverDate;
+    }
+
+    public void setUpdateDate(LocalDate updateDate) {
+        this.updateDate = updateDate;
     }
 }

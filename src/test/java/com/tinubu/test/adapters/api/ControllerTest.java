@@ -52,8 +52,8 @@ public class ControllerTest {
     @Test
     public void test_update_policy() throws Exception {
         PolicyRequest policyRequest = new PolicyRequest.PolicyRequestBuilder("policy1", LocalDate.of(2021, 1, 12),
-                LocalDate.of(2025, 12, 15), "ACTIVE").id(1).build();
-        this.mockMvc.perform(put("/update-policy").content(objectMapper.writeValueAsString(policyRequest))
+                LocalDate.of(2025, 12, 15), "ACTIVE").build();
+        this.mockMvc.perform(put("/update-policy/1").content(objectMapper.writeValueAsString(policyRequest))
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
     }
 

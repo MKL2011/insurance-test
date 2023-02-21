@@ -9,5 +9,7 @@ public interface PolicyRepository {
 
     Policy findById(Integer id);
 
+    Integer update(Policy policy);
+
     Integer save(Policy policy);
 }

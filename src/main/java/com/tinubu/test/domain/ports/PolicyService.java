@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
 @Service
 public class PolicyService {
     private final PolicyRepository policyRepository;
@@ -23,7 +21,6 @@ public class PolicyService {
 
     public Integer createPolicy(String name, LocalDate startCoverDate, LocalDate endCoverDate, String status) {
         Policy policy = new Policy.PolicyBuilder(name, startCoverDate, endCoverDate, PolicyStatus.valueOf(status))
-                .id(new AtomicInteger().incrementAndGet())
                 .creationDate(LocalDate.now())
                 .updateDate(LocalDate.now())
                 .build();
@@ -38,7 +35,7 @@ public class PolicyService {
         Policy existingPolicy = policyRepository.findById(id);
         Policy policy = new Policy(id, name, startCoverDate, endCoverDate, existingPolicy.getCreationDate(), LocalDate.now(), PolicyStatus.valueOf(status));
         if (policy.isValid())
-            return policyRepository.save(policy);
+            return policyRepository.update(policy);
         else {
             throw new InvalidPolicyException();
         }

@@ -2,11 +2,10 @@ package com.tinubu.test.adapters.api;
 
 import java.time.LocalDate;
 
-public record PolicyRequest(Integer id, String name, LocalDate startCoverDate, LocalDate endCoverDate, String status){
+public record PolicyRequest(String name, LocalDate startCoverDate, LocalDate endCoverDate, String status){
 
     public static final class PolicyRequestBuilder {
 
-        Integer id;
         String name;
         LocalDate startCoverDate;
         LocalDate endCoverDate;
@@ -19,13 +18,9 @@ public record PolicyRequest(Integer id, String name, LocalDate startCoverDate, L
             this.status = status;
         }
 
-        public PolicyRequestBuilder id(Integer id) {
-            this.id = id;
-            return this;
-        }
 
         public PolicyRequest build() {
-            return new PolicyRequest(id, name, startCoverDate, endCoverDate, status);
+            return new PolicyRequest(name, startCoverDate, endCoverDate, status);
         }
     }
 }

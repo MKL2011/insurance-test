@@ -19,11 +19,6 @@ public class DomainTest {
     }
 
     @Test
-    public void policy_id_is_not_null() {
-        assertThat(policy.isIdValid()).isFalse();
-    }
-
-    @Test
     public void policy_name_is_not_null() {
         assertThat(policy.isNameValid()).isFalse();
     }

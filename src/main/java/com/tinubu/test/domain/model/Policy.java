@@ -62,24 +62,12 @@ public class Policy {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public LocalDate getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(LocalDate updateDate) {
-        this.updateDate = updateDate;
-    }
-
     public PolicyStatus getStatus() {
         return status;
-    }
-
-    public void setStatus(PolicyStatus status) {
-        this.status = status;
     }
 
     public static final class PolicyBuilder {
@@ -121,12 +109,8 @@ public class Policy {
     }
 
     public boolean isValid(){
-        return isIdValid() && isNameValid() && isStatusValid() && isCreationDateValid() &&
+        return isNameValid() && isStatusValid() && isCreationDateValid() &&
                 isUpdateDateValid() && isStartCoverDateValid() && isEndCoverDateValid();
-    }
-
-    public boolean isIdValid() {
-        return id != null;
     }
 
     public boolean isNameValid() {

@@ -25,8 +25,8 @@ public class PolicyFacade {
         return policyService.createPolicy(policyRequest.name(), policyRequest.startCoverDate(), policyRequest.endCoverDate(), policyRequest.status());
     }
 
-    public Integer update(PolicyRequest policyRequest) {
-        return policyService.updatePolicy(policyRequest.id(),policyRequest.name(), policyRequest.startCoverDate(), policyRequest.endCoverDate(), policyRequest.status());
+    public Integer update(PolicyRequest policyRequest, Integer id) {
+        return policyService.updatePolicy(id,policyRequest.name(), policyRequest.startCoverDate(), policyRequest.endCoverDate(), policyRequest.status());
     }
 
     public PolicyResponse findById(Integer id) {

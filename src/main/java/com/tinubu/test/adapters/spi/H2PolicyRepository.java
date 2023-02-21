@@ -5,6 +5,8 @@ import com.tinubu.test.domain.model.Policy;
 import com.tinubu.test.domain.model.PolicyStatus;
 import com.tinubu.test.domain.ports.PolicyRepository;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,9 +43,24 @@ public class H2PolicyRepository implements PolicyRepository {
     }
 
     @Override
-    public Integer save(Policy policy) {
-        PolicyDataBaseModel policyDataBaseModelInput = new PolicyDataBaseModel(policy.getId(), policy.getName(), policy.getStartCoverDate(), policy.getEndCoverDate(), policy.getCreationDate(), policy.getUpdateDate(), policy.getStatus().name());
-        springDataH2PolicyRepository.save(policyDataBaseModelInput);
+    public Integer update(Policy policy) {
+        Optional<PolicyDataBaseModel> optionalPolicyDataBaseModel = springDataH2PolicyRepository.findById(policy.getId());
+        if(optionalPolicyDataBaseModel.isPresent()){
+            PolicyDataBaseModel policyDataBaseModel = optionalPolicyDataBaseModel.get();
+            policyDataBaseModel.setName(policy.getName());
+            policyDataBaseModel.setStatus(policy.getStatus().name());
+            policyDataBaseModel.setEndCoverDate(policy.getEndCoverDate());
+            policyDataBaseModel.setStartCoverDate(policy.getStartCoverDate());
+            policyDataBaseModel.setUpdateDate(LocalDate.now());
+            springDataH2PolicyRepository.save(policyDataBaseModel);
+        }
          return policy.getId();
+    }
+
+    @Override
+    public Integer save(Policy policy) {
+        PolicyDataBaseModel policyDataBaseModelInput = new PolicyDataBaseModel(policy.getName(), policy.getStartCoverDate(), policy.getEndCoverDate(), policy.getCreationDate(), policy.getUpdateDate(), policy.getStatus().name());
+        springDataH2PolicyRepository.save(policyDataBaseModelInput);
+        return policyDataBaseModelInput.getId();
     }
 }
