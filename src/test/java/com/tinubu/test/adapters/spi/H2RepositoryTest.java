@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,19 +21,28 @@ public class H2RepositoryTest {
 
     @Test
     public void should_find_no_policies_if_repository_is_empty() {
-        Iterable<PolicyDataBaseModel> policies = springDataH2PolicyRepository.findAll();
+        List<PolicyDataBaseModel> policies = springDataH2PolicyRepository.findAll();
         assertThat(policies).isEmpty();
     }
 
     @Test
     public void should_find_all_policies() {
-        PolicyDataBaseModel policyDataBaseModel1 = new PolicyDataBaseModel();
+        PolicyDataBaseModel policyDataBaseModel1 = new PolicyDataBaseModel( "policy1",
+                LocalDate.of(2021, 1, 12), LocalDate.of(2025, 12, 15),
+                LocalDate.of(2021, 10, 10), LocalDate.of(2022, 1, 11), "ACTIVE");
         entityManager.persist(policyDataBaseModel1);
 
-        PolicyDataBaseModel policyDataBaseModel2 = new PolicyDataBaseModel();
+        PolicyDataBaseModel policyDataBaseModel2 = new PolicyDataBaseModel( "policy2",
+                LocalDate.of(2021, 1, 12), LocalDate.of(2025, 12, 15),
+                LocalDate.of(2021, 10, 10), LocalDate.of(2022, 1, 11), "ACTIVE");
+
         entityManager.persist(policyDataBaseModel2);
 
-        PolicyDataBaseModel policyDataBaseModel3 = new PolicyDataBaseModel();
+
+        PolicyDataBaseModel policyDataBaseModel3 = new PolicyDataBaseModel( "policy3",
+                LocalDate.of(2021, 1, 12), LocalDate.of(2025, 12, 15),
+                LocalDate.of(2021, 10, 10), LocalDate.of(2022, 1, 11), "ACTIVE");
+
         entityManager.persist(policyDataBaseModel3);
 
         Iterable<PolicyDataBaseModel> policies = springDataH2PolicyRepository.findAll();

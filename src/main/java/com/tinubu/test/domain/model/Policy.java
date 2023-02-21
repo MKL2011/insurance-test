@@ -1,74 +1,13 @@
 package com.tinubu.test.domain.model;
 
 
+import org.springframework.lang.NonNull;
+
 import java.time.LocalDate;
 
-public class Policy {
-    private Integer id;
-    private String name;
-    private LocalDate startCoverDate;
-    private LocalDate endCoverDate;
-    private LocalDate creationDate;
-    private LocalDate updateDate;
-    private PolicyStatus status;
-
-    public Policy() {
-    }
-
-    public Policy(Integer id, String name, LocalDate startCoverDate, LocalDate endCoverDate, LocalDate creationDate, LocalDate updateDate, PolicyStatus status) {
-        this.id = id;
-        this.name = name;
-        this.startCoverDate = startCoverDate;
-        this.endCoverDate = endCoverDate;
-        this.creationDate = creationDate;
-        this.updateDate = updateDate;
-        this.status = status;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDate getStartCoverDate() {
-        return startCoverDate;
-    }
-
-    public void setStartCoverDate(LocalDate startCoverDate) {
-        this.startCoverDate = startCoverDate;
-    }
-
-    public LocalDate getEndCoverDate() {
-        return endCoverDate;
-    }
-
-    public void setEndCoverDate(LocalDate endCoverDate) {
-        this.endCoverDate = endCoverDate;
-    }
-
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-
-    public LocalDate getUpdateDate() {
-        return updateDate;
-    }
-
-    public PolicyStatus getStatus() {
-        return status;
-    }
+public record Policy(@NonNull Integer id, @NonNull String name, @NonNull LocalDate startCoverDate,
+                     @NonNull LocalDate endCoverDate,
+                     @NonNull LocalDate creationDate, @NonNull LocalDate updateDate, @NonNull PolicyStatus status) {
 
     public static final class PolicyBuilder {
 
@@ -76,30 +15,26 @@ public class Policy {
         String name;
         LocalDate startCoverDate;
         LocalDate endCoverDate;
-
         LocalDate creationDate;
         LocalDate updateDate;
         PolicyStatus status;
 
-        public PolicyBuilder(String name, LocalDate startCoverDate, LocalDate endCoverDate, PolicyStatus status) {
+        public PolicyBuilder(String name, PolicyStatus status) {
+            this.name = name;
+            this.status = status;
+        }
+
+        public PolicyBuilder(String name, LocalDate startCoverDate, LocalDate endCoverDate, PolicyStatus status, LocalDate creationDate, LocalDate updateDate) {
             this.name = name;
             this.startCoverDate = startCoverDate;
             this.endCoverDate = endCoverDate;
             this.status = status;
+            this.creationDate = creationDate;
+            this.updateDate = updateDate;
         }
 
         public Policy.PolicyBuilder id(Integer id) {
             this.id = id;
-            return this;
-        }
-
-        public Policy.PolicyBuilder creationDate(LocalDate creationDate) {
-            this.creationDate = creationDate;
-            return this;
-        }
-
-        public Policy.PolicyBuilder updateDate(LocalDate updateDate) {
-            this.updateDate = updateDate;
             return this;
         }
 

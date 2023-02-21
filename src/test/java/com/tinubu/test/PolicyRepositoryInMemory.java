@@ -25,7 +25,7 @@ public class PolicyRepositoryInMemory implements PolicyRepository {
 
     @Override
     public Policy findById(Integer id) {
-         Optional<Policy> policyOptional=getAll().stream().filter(policy -> policy.getId() == id).findFirst();
+         Optional<Policy> policyOptional=getAll().stream().filter(policy -> policy.id().equals(id)).findFirst();
          if(policyOptional.isPresent()) return policyOptional.get();
          else throw new PolicyNotFoundException();
     }

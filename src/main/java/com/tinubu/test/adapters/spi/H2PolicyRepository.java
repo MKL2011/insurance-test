@@ -28,38 +28,36 @@ public class H2PolicyRepository implements PolicyRepository {
 
     @Override
     public Policy findById(Integer id) {
-         Optional<PolicyDataBaseModel> optionalPolicyDataBaseModel=springDataH2PolicyRepository.findById(id);
-         if(optionalPolicyDataBaseModel.isPresent()){
-             PolicyDataBaseModel policyDataBaseModel = optionalPolicyDataBaseModel.get();
-             return new Policy.PolicyBuilder(policyDataBaseModel.getName(),policyDataBaseModel.getStartCoverDate(),
-                     policyDataBaseModel.getEndCoverDate(),PolicyStatus.valueOf(policyDataBaseModel.getStatus()))
-                     .id(policyDataBaseModel.getId())
-                     .creationDate(policyDataBaseModel.getCreationDate())
-                     .updateDate(policyDataBaseModel.getUpdateDate()).build();
-         }
-         else {
-             throw new PolicyNotFoundException();
-         }
+        Optional<PolicyDataBaseModel> optionalPolicyDataBaseModel = springDataH2PolicyRepository.findById(id);
+        if (optionalPolicyDataBaseModel.isPresent()) {
+            PolicyDataBaseModel policyDataBaseModel = optionalPolicyDataBaseModel.get();
+            return new Policy.PolicyBuilder(policyDataBaseModel.getName(), policyDataBaseModel.getStartCoverDate(),
+                    policyDataBaseModel.getEndCoverDate(), PolicyStatus.valueOf(policyDataBaseModel.getStatus()),
+                    policyDataBaseModel.getCreationDate(), policyDataBaseModel.getUpdateDate())
+                    .id(policyDataBaseModel.getId()).build();
+        } else {
+            throw new PolicyNotFoundException();
+        }
     }
 
     @Override
     public Integer update(Policy policy) {
-        Optional<PolicyDataBaseModel> optionalPolicyDataBaseModel = springDataH2PolicyRepository.findById(policy.getId());
-        if(optionalPolicyDataBaseModel.isPresent()){
+        Optional<PolicyDataBaseModel> optionalPolicyDataBaseModel = springDataH2PolicyRepository.findById(policy.id());
+        if (optionalPolicyDataBaseModel.isPresent()) {
             PolicyDataBaseModel policyDataBaseModel = optionalPolicyDataBaseModel.get();
-            policyDataBaseModel.setName(policy.getName());
-            policyDataBaseModel.setStatus(policy.getStatus().name());
-            policyDataBaseModel.setEndCoverDate(policy.getEndCoverDate());
-            policyDataBaseModel.setStartCoverDate(policy.getStartCoverDate());
+            policyDataBaseModel.setName(policy.name());
+            policyDataBaseModel.setStatus(policy.status().name());
+            policyDataBaseModel.setEndCoverDate(policy.endCoverDate());
+            policyDataBaseModel.setStartCoverDate(policy.startCoverDate());
             policyDataBaseModel.setUpdateDate(LocalDate.now());
             springDataH2PolicyRepository.save(policyDataBaseModel);
         }
-         return policy.getId();
+        return policy.id();
     }
 
     @Override
     public Integer save(Policy policy) {
-        PolicyDataBaseModel policyDataBaseModelInput = new PolicyDataBaseModel(policy.getName(), policy.getStartCoverDate(), policy.getEndCoverDate(), policy.getCreationDate(), policy.getUpdateDate(), policy.getStatus().name());
+        PolicyDataBaseModel policyDataBaseModelInput = new PolicyDataBaseModel(policy.name(), policy.startCoverDate(), policy.endCoverDate(), policy.creationDate(), policy.updateDate(), policy.status().name());
         springDataH2PolicyRepository.save(policyDataBaseModelInput);
         return policyDataBaseModelInput.getId();
     }

@@ -16,9 +16,9 @@ public class PolicyFacade {
     }
 
     public List<PolicyResponse> getAllPolicies() {
-        return policyService.getAllPolicies().stream().map(policy -> new PolicyResponse(policy.getId(), policy.getName(),
-                policy.getStartCoverDate(), policy.getEndCoverDate(), policy.getCreationDate(), policy.getUpdateDate(),
-                policy.getStatus().name())).collect(Collectors.toList());
+        return policyService.getAllPolicies().stream().map(policy -> new PolicyResponse(policy.id(), policy.name(),
+                policy.startCoverDate(), policy.endCoverDate(), policy.creationDate(), policy.updateDate(),
+                policy.status().name())).collect(Collectors.toList());
     }
 
     public Integer createPolicy(PolicyRequest policyRequest) {
@@ -31,7 +31,7 @@ public class PolicyFacade {
 
     public PolicyResponse findById(Integer id) {
        Policy policy= policyService.findPolicyById(id);
-       return new PolicyResponse(policy.getId(),policy.getName(),policy.getStartCoverDate(),policy.getEndCoverDate(),
-               policy.getCreationDate(),policy.getUpdateDate(),policy.getStatus().name());
+       return new PolicyResponse(policy.id(),policy.name(),policy.startCoverDate(),policy.endCoverDate(),
+               policy.creationDate(),policy.updateDate(),policy.status().name());
     }
 }

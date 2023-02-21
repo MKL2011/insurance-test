@@ -20,10 +20,6 @@ public class PolicyDataBaseModel {
     private LocalDate updateDate;
     @Column(name = "status")
     private String status;
-
-    public PolicyDataBaseModel() {
-    }
-
     public PolicyDataBaseModel(String name, LocalDate startCoverDate, LocalDate endCoverDate, LocalDate creationDate, LocalDate updateDate, String status) {
         this.name = name;
         this.startCoverDate = startCoverDate;
