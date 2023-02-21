@@ -45,7 +45,7 @@ public class ControllerTest {
     public void test_create_policy() throws Exception {
         PolicyRequest policyRequest = new PolicyRequest.PolicyRequestBuilder("policy1", LocalDate.of(2021, 1, 12),
                 LocalDate.of(2025, 12, 15), "ACTIVE").build();
-        this.mockMvc.perform(post("/create-policy").content(objectMapper.writeValueAsString(policyRequest))
+        this.mockMvc.perform(post("/policies").content(objectMapper.writeValueAsString(policyRequest))
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
     }
 
@@ -53,7 +53,7 @@ public class ControllerTest {
     public void test_update_policy() throws Exception {
         PolicyRequest policyRequest = new PolicyRequest.PolicyRequestBuilder("policy1", LocalDate.of(2021, 1, 12),
                 LocalDate.of(2025, 12, 15), "ACTIVE").build();
-        this.mockMvc.perform(put("/update-policy/1").content(objectMapper.writeValueAsString(policyRequest))
+        this.mockMvc.perform(put("/policies/1").content(objectMapper.writeValueAsString(policyRequest))
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
     }
 
