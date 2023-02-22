@@ -1,6 +1,6 @@
 package com.tinubu.test.adapters.spi;
 
-import com.tinubu.test.domain.PolicyNotFoundException;
+import com.tinubu.test.domain.exception.PolicyNotFoundException;
 import com.tinubu.test.domain.model.Policy;
 import com.tinubu.test.domain.model.PolicyStatus;
 import com.tinubu.test.domain.ports.PolicyRepository;

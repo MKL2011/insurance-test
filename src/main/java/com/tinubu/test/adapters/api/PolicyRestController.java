@@ -1,4 +1,8 @@
 package com.tinubu.test.adapters.api;
+import com.tinubu.test.domain.exception.InvalidPolicyException;
+import com.tinubu.test.domain.exception.PolicyNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,4 +36,35 @@ public class PolicyRestController {
     public PolicyResponse getPolicy(@PathVariable Integer id) {
         return policies.findById(id);
     }
+
+    @ExceptionHandler(PolicyNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handlePolicyNotFoundException(
+            PolicyNotFoundException exception
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(exception.getMessage());
+    }
+
+    @ExceptionHandler(InvalidPolicyException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> handleInvalidPolicyException(
+            InvalidPolicyException exception
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(exception.getMessage());
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> handleIllegalArgumentException(
+            IllegalArgumentException exception
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("Policy Status should be ACTIVE or INACTIVE");
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.tinubu.test.domain;
+package com.tinubu.test.domain.exception;
 
 public class InvalidPolicyException extends IllegalStateException {
     public InvalidPolicyException() {

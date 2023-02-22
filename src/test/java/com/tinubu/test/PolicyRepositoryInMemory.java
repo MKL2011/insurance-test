@@ -1,6 +1,6 @@
 package com.tinubu.test;
 
-import com.tinubu.test.domain.PolicyNotFoundException;
+import com.tinubu.test.domain.exception.PolicyNotFoundException;
 import com.tinubu.test.domain.model.Policy;
 import com.tinubu.test.domain.ports.PolicyRepository;
 

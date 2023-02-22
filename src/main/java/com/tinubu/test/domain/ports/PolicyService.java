@@ -1,6 +1,6 @@
 package com.tinubu.test.domain.ports;
 
-import com.tinubu.test.domain.InvalidPolicyException;
+import com.tinubu.test.domain.exception.InvalidPolicyException;
 import com.tinubu.test.domain.model.Policy;
 import com.tinubu.test.domain.model.PolicyStatus;
 import org.springframework.stereotype.Service;
